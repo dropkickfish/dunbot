@@ -9,6 +9,7 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import 'bootstrap'
 import './src/application.scss'
+import "@oddcamp/cocoon-vanilla-js"
 
 Rails.start()
 Turbolinks.start()
