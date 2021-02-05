@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :options
   resources :votes
   root to: 'pages#home'
   get 'pages/home'
