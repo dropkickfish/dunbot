@@ -833,6 +833,11 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
+"@oddcamp/cocoon-vanilla-js@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@oddcamp/cocoon-vanilla-js/-/cocoon-vanilla-js-1.1.0.tgz#e24d9266b3e0171d898ff66c22e1552494e0e2c1"
+  integrity sha512-Z28G/OYbcIJ375V/mWS24UyNfl3mVEzgf84P1Mts4vh9mmbR4qA8oWFzblA+/Ae2xN0EoyCdXj4QinY5/DcQ5A==
+
 "@rails/actioncable@^6.0.0":
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-6.1.1.tgz#e980b2ea1c62cae17bcddad37deb6ba88d498b63"
