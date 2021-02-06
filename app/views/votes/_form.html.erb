@@ -1,19 +1,15 @@
 <%= simple_form_for @vote do |f| %>
 
   <h3>Add some options</h3>
-  <div id='options' >
     <%= f.simple_fields_for :options do |option| %>
       <%= render 'option_fields', :f => option %>
     <% end %>
     <div class='links'>
       <%= link_to_add_association 'add option', f, :options%>
     </div>
-  </div>
 
   <h3>How many participants?</h3>
-  <div id='participants'>
     <%= f.input :participants, input_html: { min: '0'} %>
-  </div>
 
   <%= f.submit 'Save' %>
 <% end %>
