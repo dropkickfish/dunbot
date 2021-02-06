@@ -6,7 +6,10 @@
  <div>
     <h3>Votes in progress</h3>
     <p>Oh look, it's fucking nothing</p>
-    <h3>Create a vote</h3>
+    <h3 data-no-turbolink="true">
+        <a data-toggle="collapse" href="#create" aria-expanded="false" aria-controls="create">Create a new vote</a>
+    </h3>
+    <%= render 'layouts/form' %>
     <h3>Past votes</h3>
     <ul>
         <li>Finished yesterday</li>
