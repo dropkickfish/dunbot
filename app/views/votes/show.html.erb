@@ -1,9 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Finished:</strong>
-  <%= @vote.finished %>
-</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Votes</th>
+    </tr>
+  </thead>
+  <tbody> 
+ <% options = Option.where("vote_id = ?", @vote.id)%>
+ <% options.each do |option| %>
+     <tr>
+       <td><%= option.name %></td>          
+       <td>Placeholder for votes cast</td>
+    </tr>
+   <% end %>
+   </tbody>
+</table>
+<%
+<<-COMMENT
+%>
 
 <%= link_to 'Edit', edit_vote_path(@vote) %> |
 <%= link_to 'Back', votes_path %>
+
+<%      
+COMMENT
+%>
