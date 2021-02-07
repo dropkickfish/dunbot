@@ -1,0 +1,8 @@
+  <div class='nested-fields'>
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name, required: true %>
+      <%= f.hidden_field :vote_id, value: @vote.id %>
+    </div>
+    <%= link_to_remove_association "Remove option", f %>
+  </div>
