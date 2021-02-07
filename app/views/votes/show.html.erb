@@ -17,6 +17,13 @@
    <% end %>
    </tbody>
 </table>
+<% if current_user.id == Vote.find(@vote.id).user_id%>
+  <%= form_for @vote, remote: true do |f| %>
+        <%= f.hidden_field :finished, :value => true %>
+        <%= f.submit "Close voting", confirm: "Are you sure?" %>
+    <% end %>
+<% end %>
+
 <%
 <<-COMMENT
 %>
