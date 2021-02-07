@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<h3>Options</h3>
 <table class="table">
   <thead>
     <tr>
@@ -17,6 +17,25 @@
    <% end %>
    </tbody>
 </table>
+<h3>Participants</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Voted</th>
+    </tr>
+  </thead>
+  <tbody> 
+ <% options = Participant.where("vote_id = ?", @vote.id)%>
+ <% options.each do |participant| %>
+     <tr>
+       <td><%= participant.name %></td>          
+       <td>Placeholder for voted</td>
+    </tr>
+   <% end %>
+   </tbody>
+</table>
+<h3> Placeholder left to vote: x </h3>
 <% if current_user.id == Vote.find(@vote.id).user_id%>
   <%= form_for @vote, remote: true do |f| %>
         <%= f.hidden_field :finished, :value => true %>

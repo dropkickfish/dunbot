@@ -4,6 +4,10 @@
       <%= f.label :name %>
         <%= f.text_field :name, required: true %>
       </div>
+      <div class="col-3">
+      <%= f.label :email %>
+        <%= f.text_field :email, required: false %>
+      </div>
         <%= f.hidden_field :vote_id, value: @vote.id %>
       <div class="col-3">
         <%= link_to_remove_association "Remove option", f %>

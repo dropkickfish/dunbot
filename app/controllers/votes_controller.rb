@@ -14,6 +14,7 @@ class VotesController < ApplicationController
   def new
     @vote = Vote.new
     @vote.options.build 
+    @vote.participants.build 
   end
 
   # GET /votes/1/edit

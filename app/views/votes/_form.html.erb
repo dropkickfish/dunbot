@@ -22,8 +22,21 @@
         </div>
       </div>
 
+      <h3>Participants</h3>
+      <div id="participants">
+      <% @vote.participants.build %>
+      <% @vote.participants.build %>
+        <%= f.fields_for :participants do |participant| %>
+          <%= render 'pages/participant_fields', :f => participant %>
+        <% end %>
+        <div class='links'>
+          <%= link_to_add_association 'Add participant', f, :participants %>
+        </div>
+      </div>
       <div class="form-actions">
         <%= f.button :submit %>
+         <%= f.fields_for :participants do |participant| %>
+         <% end %>
       </div>
     <% end %>
   </div>
