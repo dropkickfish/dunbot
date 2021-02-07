@@ -10,18 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_06_221327) do
+ActiveRecord::Schema.define(version: 2021_02_06_225628) do
 
   create_table "ballots", force: :cascade do |t|
     t.integer "sequence"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "participant_id", null: false
+    t.integer "option_id", null: false
+    t.index ["option_id"], name: "index_ballots_on_option_id"
+    t.index ["participant_id"], name: "index_ballots_on_participant_id"
   end
 
   create_table "options", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "vote_id", null: false
+    t.index ["vote_id"], name: "index_options_on_vote_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -29,6 +35,10 @@ ActiveRecord::Schema.define(version: 2021_02_06_221327) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.integer "vote_id", null: false
+    t.index ["user_id"], name: "index_participants_on_user_id"
+    t.index ["vote_id"], name: "index_participants_on_vote_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,6 +59,14 @@ ActiveRecord::Schema.define(version: 2021_02_06_221327) do
     t.boolean "finished"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "ballots", "options"
+  add_foreign_key "ballots", "participants"
+  add_foreign_key "options", "votes"
+  add_foreign_key "participants", "users"
+  add_foreign_key "participants", "votes"
+  add_foreign_key "votes", "users"
 end
