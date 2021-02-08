@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   resources :options
   resources :votes
+  resources :ballots
   root to: 'pages#home'
   get 'pages/home'
   devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get "/votes/:id/ballot/:participant" => "votes#ballot"
 end

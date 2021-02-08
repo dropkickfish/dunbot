@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_07_152316) do
+ActiveRecord::Schema.define(version: 2021_02_07_154811) do
 
   create_table "ballots", force: :cascade do |t|
     t.integer "sequence"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2021_02_07_152316) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.integer "vote_id", null: false
+    t.boolean "voted"
     t.index ["user_id"], name: "index_participants_on_user_id"
     t.index ["vote_id"], name: "index_participants_on_vote_id"
   end
