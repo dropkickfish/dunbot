@@ -4,21 +4,24 @@
   <p> You voted for </p>
 <% else %>
   <h3> Cast your vote </h3>
+  <p> Drag to rearrange the options in order of preference - highest to lowest from top to bottom </p>
   <% @ballot = Ballot.new %>
-  <%= simple_form_for(@ballot) do |f| %>
-    <%= f.error_notification %>
-    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-    <% @options.each do |o|%>
+  <%= form_for "ballot[]", :url => ballots_path do |f| %>
     <div class="form-inputs">
-      <%= f.label o.name %>
-      <%= f.number_field :sequence %>
-      <%= f.hidden_field :option_id, value: o.id %>
+      <div data-controller="drag">   
+      <% n = 1 %>
+        <% @options.each do |o|%>
+          <div class="card card-body mb-4 sortable">
+          <%= f.label o.name %>
+          <%= f.hidden_field :position, value: n %>
+          <%= f.hidden_field :option_id, value: o.id %>
+          <%= f.hidden_field :participant_id, value: @participant.id %>
+          <% n += 1 %>
+          </div>
+        <% end %>
     </div>
-    <%end%>
-
-    <div class="form-actions">
-      <%= f.button :submit %>
-    </div>
+      <%= f.submit "Vote now", class: 'btn btn-success'%>
+      </div>
+    </div>   
   <% end %>
 <% end %>

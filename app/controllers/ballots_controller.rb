@@ -1,9 +1,9 @@
-class BallotController < ApplicationController
+class BallotsController < ApplicationController
   before_action :set_ballot, only: %i[ show edit update destroy ]
 
   # GET /ballots or /ballots.json
   def index
-    @ballots = ballot.all
+    @ballots = Ballot.all
   end
 
   # GET /ballots/1 or /ballots/1.json
@@ -12,9 +12,7 @@ class BallotController < ApplicationController
 
   # GET /ballots/new
   def new
-    @ballot = ballot.new
-    @ballot.options.build 
-    @ballot.participants.build 
+    @ballot = Ballot.new
   end
 
   # GET /ballots/1/edit
@@ -23,14 +21,18 @@ class BallotController < ApplicationController
 
   # POST /ballots or /ballots.json
   def create
-    @ballot = ballot.new(ballot_params)
-
+    @ballots = ballot_params
+    @ballots.each do |p|
+    @ballot = Ballot.new(p)
+    end
     respond_to do |format|
+      puts "there should be something here #{@ballots.first[:option_id]}"
+      @option = Option.where(id:(@ballots.first[:option_id])).first
       if @ballot.save
-        format.html { redirect_to @ballot, notice: "ballot was successfully created." }
+        format.html { redirect_to vote_path(@option.vote_id), notice: "Your vote was cast." }
         format.json { render :show, status: :created, location: @ballot }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render root_path, status: :unprocessable_entity }
         format.json { render json: @ballot.errors, status: :unprocessable_entity }
       end
     end
@@ -61,12 +63,13 @@ class BallotController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ballot
-      @ballot = ballot.find(params[:id])
+      @ballot = Ballot.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def ballot_params
-      params.require(:ballot).permit(:finished, :user_id, options_attributes: ([:_destroy] + Option.column_names.map(&:to_sym)),
-                                   participants_attributes: ([:_destroy] + Participant.column_names.map(&:to_sym)))
+      params.require(:ballot).map do |p|
+        p.permit(:position, :option_id, :participant_id)
+      end
     end
 end

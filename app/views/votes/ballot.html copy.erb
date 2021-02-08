@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<% if @participant.voted == true%>
+  <h3> You have already voted </h3>
+  <p> You voted for </p>
+<% else %>
+  <h3> Cast your vote </h3>
+  <p> Drag to rearrange the options in order of preference - highest to lowest from top to bottom </p>
+  <% @ballot = Ballot.new %>
+  <%= simple_form_for(@ballot) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <div class="form-inputs">
+      <div data-controller="drag">   
+      <% n = 1%>
+      
+        <% @options.each do |o|%>
+        
+        <div class="card card-body mb-4">
+            <%= f.label o.name %>
+            <%= f.hidden_field :position, value: n %>
+            <%= f.hidden_field :option_id, value: o.id %>
+            <%= f.hidden_field :participant_id, value: @participant.id %>
+        </div>
+        <% n += 1%>
+        <%end%>
+        </div>
+        </div>
+
+    <div class="form-actions">
+    <%= f.button :submit %>
+    </div>
+  <% end %>
+<% end %>

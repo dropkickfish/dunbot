@@ -12,6 +12,7 @@ class VotesController < ApplicationController
 
   # GET /votes/1/ballot/participant or /votes/1/ballot/participant.json
   def ballot
+    @ballot = Array.new { Ballot.new }
     @options = Option.where(vote_id: params[:id]).order(created_at: :desc)
     @participant = Participant.find_by(id: params[:participant])
   end

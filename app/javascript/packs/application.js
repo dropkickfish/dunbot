@@ -10,6 +10,8 @@ import "channels"
 import 'bootstrap'
 import './src/application.scss'
 import "@oddcamp/cocoon-vanilla-js"
+import "sortablejs"
+import 'controllers'
 
 Rails.start()
 Turbolinks.start()

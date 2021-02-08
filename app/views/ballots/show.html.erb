@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<h3>Your ballot</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Rank</th>
+    </tr>
+  </thead>
+  <tbody> 
+ <% ballots = Ballot.where("id = ?", @ballot.id)%>
+ <% ballots.each do |ballot| %>
+ <% option = Option.where("id = ?", ballot.option_id)%>
+     <tr>
+       <td><%= option.name %></td>          
+       <td><%= ballot.position %></td>
+    </tr>
+   <% end %>
+   </tbody>
+</table>

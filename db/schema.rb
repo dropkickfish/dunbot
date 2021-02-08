@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_07_154811) do
+ActiveRecord::Schema.define(version: 2021_02_08_210151) do
 
   create_table "ballots", force: :cascade do |t|
-    t.integer "sequence"
+    t.integer "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "participant_id", null: false
