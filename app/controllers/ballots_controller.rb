@@ -26,7 +26,6 @@ class BallotsController < ApplicationController
     @ballot = Ballot.new(p)
     end
     respond_to do |format|
-      puts "there should be something here #{@ballots.first[:option_id]}"
       @option = Option.where(id:(@ballots.first[:option_id])).first
       if @ballot.save
         format.html { redirect_to vote_path(@option.vote_id), notice: "Your vote was cast." }
