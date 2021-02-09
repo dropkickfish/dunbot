@@ -30,8 +30,26 @@ class VotesController < ApplicationController
 
   # POST /votes or /votes.json
   def create
-    @vote = Vote.new(vote_params)
 
+    @modified_params = vote_params
+    @user = User.all
+    @participants = @modified_params[:participants_attributes]
+
+    @participants.each do |p|
+      participant = p[1]
+      u = User.where(username: (participant[:username])).first
+      e = User.where(email: (participant[:email])).first
+        if u != nil
+          puts "user id is #{participant[:user_id]}"
+            participant[:user_id] = u.id
+            puts "user id is #{participant[:user_id]}"
+        elsif e != nil
+          participant[:user_id] == e.id
+        else
+        end
+    end
+
+    @vote = Vote.new(@modified_params)
     respond_to do |format|
       if @vote.save
         format.html { redirect_to @vote, notice: "Vote was successfully created." }

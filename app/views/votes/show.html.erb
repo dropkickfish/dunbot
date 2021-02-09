@@ -29,7 +29,7 @@
  <% options = Participant.where("vote_id = ?", @vote.id)%>
  <% options.each do |participant| %>
      <tr>
-       <td><%= participant.name %></td>          
+       <td><%= participant.username %></td>          
        <td>Placeholder for voted</td>
     </tr>
    <% end %>
