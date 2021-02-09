@@ -38,3 +38,6 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+db/backups/two users/development.sqlite3
+db/backups/two users simple vote(1 cast)/development.sqlite3
+db/backups/two users simple vote(unvoted)/development.sqlite3
