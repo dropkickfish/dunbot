@@ -40,9 +40,7 @@ class VotesController < ApplicationController
       u = User.where(username: (participant[:username])).first
       e = User.where(email: (participant[:email])).first
         if u != nil
-          puts "user id is #{participant[:user_id]}"
             participant[:user_id] = u.id
-            puts "user id is #{participant[:user_id]}"
         elsif e != nil
           participant[:user_id] == e.id
         else
