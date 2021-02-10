@@ -22,20 +22,19 @@ class BallotsController < ApplicationController
   # POST /ballots or /ballots.json
   def create
     @ballots = ballot_params
-    @ballots.each do |p|
-    @ballot = Ballot.new(p)
-    end
-    respond_to do |format|
-      puts "there should be something here #{@ballots.first[:option_id]}"
-      @option = Option.where(id:(@ballots.first[:option_id])).first
-      if @ballot.save
-        format.html { redirect_to vote_path(@option.vote_id), notice: "Your vote was cast." }
-        format.json { render :show, status: :created, location: @ballot }
-      else
-        format.html { render root_path, status: :unprocessable_entity }
-        format.json { render json: @ballot.errors, status: :unprocessable_entity }
-      end
-    end
+    Ballot.insert_all(@ballots)
+     @option = Option.where(id:(@ballots.first[:option_id])).first
+     redirect_to vote_path(@option.vote_id)
+    # respond_to do |format|
+    #   @option = Option.where(id:(@ballots.first[:option_id])).first
+    #   if @ballots.save
+    #     format.html { redirect_to vote_path(@option.vote_id), notice: "Your vote was cast." }
+    #     format.json { render :show, status: :created, location: @ballot }
+    #   else
+    #     format.html { render root_path, status: :unprocessable_entity }
+    #     format.json { render json: @ballot.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /ballots/1 or /ballots/1.json
@@ -69,7 +68,7 @@ class BallotsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def ballot_params
       params.require(:ballot).map do |p|
-        p.permit(:position, :option_id, :participant_id)
+        p.permit(:position, :option_id, :participant_id, :created_at)
       end
     end
 end
