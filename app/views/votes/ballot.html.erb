@@ -16,6 +16,7 @@
           <%= f.hidden_field :position, value: n %>
           <%= f.hidden_field :option_id, value: o.id %>
           <%= f.hidden_field :participant_id, value: @participant.id %>
+          <%= f.hidden_field :created_at, value: Time.now %>
           <% n += 1 %>
           </div>
         <% end %>

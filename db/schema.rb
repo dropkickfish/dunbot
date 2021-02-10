@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2021_02_09_025134) do
+=======
+ActiveRecord::Schema.define(version: 2021_02_10_210543) do
+>>>>>>> Prototyping-vote-related-models
 
   create_table "ballots", force: :cascade do |t|
     t.integer "position"
