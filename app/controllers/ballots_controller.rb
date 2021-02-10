@@ -24,6 +24,9 @@ class BallotsController < ApplicationController
     @ballots = ballot_params
     Ballot.insert_all(@ballots)
      @option = Option.where(id:(@ballots.first[:option_id])).first
+     @participant = Participant.where(id:(@ballots.first[:participant_id])).first
+     @participant.voted = true 
+     @participant.save
      redirect_to vote_path(@option.vote_id)
     # respond_to do |format|
     #   @option = Option.where(id:(@ballots.first[:option_id])).first

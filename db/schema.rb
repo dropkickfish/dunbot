@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_02_10_210543) do
   create_table "ballots", force: :cascade do |t|
     t.integer "position"
     t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false 
     t.integer "participant_id", null: false
     t.integer "option_id", null: false
     t.index ["option_id"], name: "index_ballots_on_option_id"

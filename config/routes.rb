@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get 'pages/home'
   devise_for :users
-  get "/votes/:id/ballot/:participant" => "votes#ballot"
+  get '/votes/:id/ballot/:participant' => 'votes#ballot', as: 'user_ballot'
 end

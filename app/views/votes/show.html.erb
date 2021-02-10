@@ -23,33 +23,30 @@
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Voted</th>
+      <th scope="col">Link</th>
     </tr>
   </thead>
   <tbody> 
- <% options = Participant.where("vote_id = ?", @vote.id)%>
- <% options.each do |participant| %>
+ <% participants = Participant.where("vote_id = ?", @vote.id)%>
+ <% participants.each do |participant| %>
      <tr>
        <td><%= participant.username %></td>          
-       <td>Placeholder for voted</td>
+       <td><% if participant.voted %> <%= "✔️" %> <% else %> <%= "❌" %> <% end %></td>
+       <td><%= link_to "Vote link for #{participant.username}", user_ballot_url(@vote.id, participant.id)%>
     </tr>
    <% end %>
    </tbody>
 </table>
-<h3> Placeholder left to vote: x </h3>
+<% p_number = participants.length %>
+<% voted = participants.where(voted: true).length %>
+<% if p_number > voted %>
+  <h3> Users left to vote: <%= p_number - voted %> </h3>
+  <% else %>
+  <h3> Voting closed </h3>
+<% end %>
 <% if current_user.id == Vote.find(@vote.id).user_id%>
   <%= form_for @vote, remote: true do |f| %>
         <%= f.hidden_field :finished, :value => true %>
         <%= f.submit "Close voting", confirm: "Are you sure?" %>
     <% end %>
 <% end %>
-
-<%
-<<-COMMENT
-%>
-
-<%= link_to 'Edit', edit_vote_path(@vote) %> |
-<%= link_to 'Back', votes_path %>
-
-<%      
-COMMENT
-%>
