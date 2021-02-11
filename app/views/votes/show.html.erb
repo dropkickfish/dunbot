@@ -8,11 +8,11 @@
     </tr>
   </thead>
   <tbody> 
- <% options = Option.where("vote_id = ?", @vote.id)%>
- <% options.each do |option| %>
+ <% @options = Option.where("vote_id = ?", @vote.id)%>
+ <% @options.each do |option| %>
      <tr>
        <td><%= option.name %></td>          
-       <td>Placeholder for votes cast</td>
+       <td>Placeholder for ranks awarded</td>
     </tr>
    <% end %>
    </tbody>
@@ -27,8 +27,8 @@
     </tr>
   </thead>
   <tbody> 
- <% participants = Participant.where("vote_id = ?", @vote.id)%>
- <% participants.each do |participant| %>
+ <% @participants = Participant.where("vote_id = ?", @vote.id)%>
+ <% @participants.each do |participant| %>
      <tr>
        <td><%= participant.username %></td>          
        <td><% if participant.voted %> <%= "✔️" %> <% else %> <%= "❌" %> <% end %></td>
@@ -37,12 +37,16 @@
    <% end %>
    </tbody>
 </table>
-<% p_number = participants.length %>
-<% voted = participants.where(voted: true).length %>
+<% p_number = @participants.length %>
+<% voted = @participants.where(voted: true).length %>
 <% if p_number > voted %>
   <h3> Users left to vote: <%= p_number - voted %> </h3>
   <% else %>
+  <% close_vote(@vote.id) %>
   <h3> Voting closed </h3>
+  <% @ballots = Ballot.joins(:option).where("vote_id = ?", @vote.id)%>
+  <% %>
+  <p> The winner is <%= new_vote(@options, @ballots)%></p>
 <% end %>
 <% if current_user.id == Vote.find(@vote.id).user_id%>
   <%= form_for @vote, remote: true do |f| %>
