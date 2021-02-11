@@ -18,3 +18,4 @@ Ever been stuck with a group trying to decide between many options? This app use
 
 - Tackle everything on the limitations list
 - Write tests - I was horribly lazy and elected not to write tests due to other life commitments, but it's on my list
+- Pay more attention to the api in order to eventually allow for a Discord bot
